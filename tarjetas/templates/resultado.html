@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Resultado</title>
+    <style>
+       
+        .result-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 10px; /* Espaciado más reducido */
+            margin-bottom: 5px; /* Menor separación entre filas */
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
+        }
+        .result-message {
+            font-size: 0.9rem; /* Texto ligeramente más pequeño */
+            font-weight: bold;
+            margin-left: 8px; /* Reducción del margen lateral */
+        }
+        .custom-alert {
+            max-width: 500px;
+            font-size: 1.2rem;
+            margin: 15px auto; /* Ajuste para centrar */
+            text-align: center;
+        }
+        h2, h4, h1 {
+            font-family: 'Arial', sans-serif;
+        }
+        h2 {
+            margin-bottom: 15px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h4>Datos enviados:</h4>
+        <ul class="fs-5">
+            {% for key, value in data.items %}
+                <li>{{ key }}: <span class="text-primary">{{ value }}</span></li>
+            {% endfor %}
+        </ul>
+    </div>  
+
+    <div class="container mt-4">
+        <div class="row">
+                <!-- Decision Tree -->
+            <div class="col-md-2 mb-3">
+                            <h6 class="mb-0 fw-bold">Decision Tree:</h6>
+            </div>
+            <div class="col-md-1 mb-3">
+                            <span class="ms-1">{{ fraude_dt }}</span>
+            </div>
+            <div class="fs-5 col-md-2 mb-3">
+                           {% if fraude_dt == 1 %}
+                                <span class="text-danger result-message">Es fraude</span>
+                            {% else %}
+                                <span class="text-success result-message">No es fraude</span>
+                            {% endif %}
+            </div>
+
+            <div class="col-md-7 mb-3">
+                   <p> </p>
+            </div>
+
+        </div>
+        <div class="row">
+                <!-- Random Forest -->
+                <div class="col-md-2 mb-3">
+                            <h6 class="mb-0 fw-bold">Random Forest:</h6>
+                </div>
+                <div class="col-md-1 mb-3">
+                            <span class="ms-1">{{ fraude_rf }}</span>
+                </div>
+                <div class="fs-5 col-md-2 mb-3">
+                            {% if fraude_rf == 1 %}
+                                <span class="text-danger result-message">Es fraude</span>
+                            {% else %}
+                                <span class="text-success result-message">No es fraude</span>
+                            {% endif %}
+                </div>
+
+                <div class="col-md-7 mb-3">
+                   <p> </p>
+                </div>
+
+        </div>
+        <div class="row">
+                <!-- Gradient Boosting -->
+                <div class="col-md-2 mb-3">
+                            <h6 class="mb-0 fw-bold">Gradient Boosting:</h6>
+                </div>
+                <div class="col-md-1 mb-3">
+                            <span class="ms-1">{{ fraude_gb }}</span>
+                </div>
+                <div class="fs-4 col-md-2 mb-3">
+                            {% if fraude_gb == 1 %}
+                                <span class="text-danger result-message">Es fraude</span>
+                            {% else %}
+                                <span class="text-success result-message">No es fraude</span>
+                            {% endif %}
+                </div>
+
+                <div class="col-md-7 mb-3">
+                   <p> </p>
+                </div>
+
+        </div>
+    </div>    
+
+              
+          
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Resultado Final -->
+            <div class="col-md-2 mb-3">
+                        <h5 class="mb-0 fw-bold">Resultado Final:</h5>
+            </div>
+
+            <div class="col-md-1 mb-3">
+                            <span class="ms-1">{{ fraude_total }}</span>
+                </div>
+
+            
+                <div class="fs-6 col-md-2 mb-1 alert {% if fraude_total == 1 %}alert-danger{% else %}alert-success{% endif %} custom-alert text-center align-self-start py-1 px-2" role="alert" style="position: relative; top: -10px;">
+                    {% if fraude_total == 1 %}
+                        Es fraude
+                    {% else %}
+                        No es fraude
+                    {% endif %}
+                </div>
+
+            <div class="col-md-3 mb-3">
+                <p></p>
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <a href="{% url 'predecir' %}" class="btn btn-primary btn-md" role="button">Nueva Predicción</a>
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <p></p>
+            </div>
+
+        </div>
+    </div>     
+</body>
+</html>
