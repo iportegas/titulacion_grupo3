@@ -12,15 +12,6 @@ gb_path = os.path.join(BASE_DIR, 'modelo_gb.pkl')
 with open(encoders_path, 'rb') as f:
     encoders = pickle.load(f)
 
-
-# Verificar las columnas y clases de los encoders
-#print("Columnas con encoders y sus clases:")
-#for column, encoder in encoders.items():
-    #if hasattr(encoder, 'classes_'):  # Verificar si el encoder tiene clases
-        #print(f"Columna: {column}, Número de clases: {len(encoder.classes_)}, Clases: {encoder.classes_}")
-    #else:
-        #print(f"Columna: {column}, El encoder no tiene clases")
-
 # Cargar los modelos
 with open(dt_path, 'rb') as f:
     modelo_dt = pickle.load(f)
