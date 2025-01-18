@@ -14,12 +14,12 @@ with open(encoders_path, 'rb') as f:
 
 
 # Verificar las columnas y clases de los encoders
-print("Columnas con encoders y sus clases:")
-for column, encoder in encoders.items():
-    if hasattr(encoder, 'classes_'):  # Verificar si el encoder tiene clases
-        print(f"Columna: {column}, Número de clases: {len(encoder.classes_)}, Clases: {encoder.classes_}")
-    else:
-        print(f"Columna: {column}, El encoder no tiene clases")
+#print("Columnas con encoders y sus clases:")
+#for column, encoder in encoders.items():
+    #if hasattr(encoder, 'classes_'):  # Verificar si el encoder tiene clases
+        #print(f"Columna: {column}, Número de clases: {len(encoder.classes_)}, Clases: {encoder.classes_}")
+    #else:
+        #print(f"Columna: {column}, El encoder no tiene clases")
 
 # Cargar los modelos
 with open(dt_path, 'rb') as f:
@@ -31,14 +31,10 @@ with open(gb_path, 'rb') as f:
 
 
 
-#def prediccion(category, amt, city, state, age, transaction_hour, transaction_day_of_month, transaction_day_of_week, 
-#    profession_group, fraud_category_merchant):
 
 def prediccion(data):
-    # Imprimir los nombres de las columnas y la longitud de los encoders
-    print("Columnas con encoders y su longitud:")
     for column, encoder in encoders.items():
-        if hasattr(encoder, 'classes_'):  # Asegurarse de que el encoder tenga clases
+        if hasattr(encoder, 'classes_'):  
             print(f"Columna: {column}, Longitud: {len(encoder.classes_)}")
         else:
             print(f"Columna: {column}, Longitud: No disponible (El encoder no tiene 'classes_')")
@@ -51,11 +47,8 @@ def prediccion(data):
     for column in ['category', 'city', 'state', 'profession_group']:
         if column in encoders:
             encoder = encoders[column]
-            print(column)
             try:
-                print(data[column])
                 data[column] = encoder.transform(data[column])
-                print(data[column])
             except ValueError as e:
                 print(f"Error al transformar la columna '{column}': {e}")
                 print(f"Valores no reconocidos en '{column}': {set(data[column]) - set(encoder.classes_)}")

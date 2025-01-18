@@ -4,7 +4,8 @@ class APIClient:
     @staticmethod
     def call_api(data):
         # URL de tu API
-        api_url = "http://localhost:8000/api/predecir_fraude/"
+        api_url = "http://localhost/api/predecir_fraude/"
+        print(data)
         
         try:
             # Realizar la solicitud POST

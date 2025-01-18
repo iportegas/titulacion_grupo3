@@ -39,5 +39,5 @@ def predecir(request):
     else:
         # Si no es POST, muestra un formulario vacío
         
-        return render(request, 'predecir_form.html',{'category_lista':category_lista,'city_lista':city_lista,
-                                                  'state_lista':state_lista,'profession_lista':profession_lista, 'state_city_dict': state_city_dict} )
+        return render(request, 'predecir_form.html',{'category_lista':category_lista,'state_lista':state_lista,
+                                                     'profession_lista':profession_lista, 'state_city_dict': state_city_dict} )
